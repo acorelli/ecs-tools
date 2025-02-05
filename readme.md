@@ -60,37 +60,23 @@ Before using the tools in this repository, ensure you have the following install
     
 ## **Usage**    
   
-### ** Setting Up Your AWS Environment**    
+### **Setting Up Your AWS Environment**    
 Before running any commands, make sure:  
 - You have **AWS credentials configured** (via `aws configure` or environment variables).  
 - Your **AWS CLI is authenticated**.  
+- You define your AWS IAM Roles and Policies
+- Substitute the appropriate Role/Policy ARNs in the configuration scripts
+- Configure any other values in the configuration scripts as necessary
   
 ---  
   
-### ** Starting Your AWS Environment**  
+### **Starting Your AWS Environment**  
   
-To **initialize** and start your AWS environment (e.g., setting up S3 buckets, DynamoDB, and other AWS resources), use:  
+To **initialize** and launch your container to ECS use:  
   
 ```bash  
 python easy_aws.py start
-```  
-  
-This will:  
-**Provision required AWS resources** (S3, DynamoDB, IAM roles, etc.).    
-**Ensure services are running** with the correct configurations.    
-**Verify connections** and check for potential issues.  
-  
-- **Docker Configurations**:  
-  
-  - **Dockerfile**: Use this file to build your application container.  
-  - **Dockerfile.dynamodb**: A Dockerfile specifically for setting up a local DynamoDB instance.  
-  - **docker-compose.yml**: Utilize Docker Compose to manage multi-container applications.  
-  
-- **AWS Interaction Scripts**:  
-  
-  - **easy_aws.py**: A Python script to simplify common AWS operations.  
-  - **ls3.ps1**: A PowerShell script for interacting with AWS S3 buckets.  
-  - **docker_login.ps1**: A PowerShell script to facilitate Docker login processes.  
+```    
   
 ## **License**  
   
