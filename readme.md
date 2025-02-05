@@ -27,7 +27,7 @@ The **ECS Tools** repository provides a suite of scripts and configurations desi
   
 - **CI/CD Scripts**: Automate the build and deployment pipeline for ECS applications.  
 - **Docker Configurations**: Predefined Dockerfiles and Compose files for setting up development and production environments.  
-- **AWS Integration**: Scripts to facilitate interactions with AWS services like DynamoDB and S3.  
+- **AWS Integration**: Scripts to facilitate interactions & testing with AWS services like DynamoDB and S3.  
   
 ## **Prerequisites**  
   
@@ -64,11 +64,15 @@ Before using the tools in this repository, ensure you have the following install
 Before running any commands, make sure:  
 - You have **AWS credentials configured** (via `aws configure` or environment variables).  
 - Your **AWS CLI is authenticated**.  
-- You define your AWS IAM Roles and Policies
-- Substitute the appropriate Role/Policy ARNs in the configuration scripts
+- You define your **AWS IAM Roles and Policies**
+- Substitute the appropriate **Role/Policy ARNs** in the configuration scripts
 - Configure any other values in the configuration scripts as necessary
   
----  
+### **Setting Up Your Containerized Project**  
+Currently the Dockerfile is designed to:
+- Copy the current project directory into the container.
+- Run `app.js` as the main entry point  
+
   
 ### **Starting Your AWS Environment**  
   
@@ -76,7 +80,13 @@ To **initialize** and launch your container to ECS use:
   
 ```bash  
 python easy_aws.py start
-```    
+```  
+  
+This will call the `cicd_scripts/launch_cluster.py` and:
+  - Create & push to the **ECR repo**  
+  - Create the **ECS Cluster**  
+  - Register the **task definition**  
+  - Create a **service** for that cluster and task definition  
   
 ## **License**  
   
