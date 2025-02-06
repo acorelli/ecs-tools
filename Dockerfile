@@ -21,6 +21,7 @@ RUN npm install -g nodemon
 COPY . .
 
 EXPOSE 80
+EXPOSE 443
 
 # Set default value for COMPOSE_RUN
 ARG COMPOSE_RUN=false

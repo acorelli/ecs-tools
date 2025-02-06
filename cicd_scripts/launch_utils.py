@@ -3,6 +3,7 @@ import base64
 import getpass
 import logging
 import os
+import re
 import uuid
 import subprocess
 import sys
@@ -147,6 +148,8 @@ def get_params(logger, args):
   
   tags = [{'key': 'creator', 'value': local_username}]
   
+  ports = os.getenv('PORTS', '[80, 443]')
+  ports = [int(num) for num in re.findall(r'\d+', ports]
   
   params = {
     'cluster_name': cluster_name,
@@ -164,7 +167,8 @@ def get_params(logger, args):
     'image_uri': image_uri,
     'local_container': local_container,
     'local_username': local_username,
-    'tags': tags
+    'tags': tags,
+    'ports': ports
   }
   
   # check for -f/--force

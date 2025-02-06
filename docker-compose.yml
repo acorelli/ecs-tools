@@ -13,6 +13,7 @@ services:
       - node_modules:/usr/src/app/node_modules/
     ports:
       - "80:80"
+      - "443:443"
     # Dummy values to make aws-sdk happy when local
     environment:
       - AWS_ACCESS_KEY_ID=foo

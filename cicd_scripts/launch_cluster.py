@@ -122,7 +122,15 @@ def register_task_definition(logger, params):
   task_execution_role_arn = params["task_execution_role_arn"]
   container_name = params["container_name"]
   image_uri = params["image_uri"]
-  
+  ports = params["ports"]
+  portMappings = []
+  for port in ports:
+    mapping = {
+      'containerPort': port,
+      'hostPort': port,
+      'protocol': 'tcp'
+    }
+    portMappings.append(mapping)
   try:
     response = ecs.register_task_definition(
       tags=tags,
@@ -146,13 +154,7 @@ def register_task_definition(logger, params):
             'awslogs-stream-prefix': 'ecs'
           }
         },
-        'portMappings': [
-          {
-            'containerPort': 80,
-            'hostPort': 80,
-            'protocol': 'tcp'
-          }
-        ],
+        'portMappings': portMappings,
         'cpu': 0
       }
       ]
