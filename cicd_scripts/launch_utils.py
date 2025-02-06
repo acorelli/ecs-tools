@@ -149,7 +149,7 @@ def get_params(logger, args):
   tags = [{'key': 'creator', 'value': local_username}]
   
   ports = os.getenv('PORTS', '[80, 443]')
-  ports = [int(num) for num in re.findall(r'\d+', ports]
+  ports = [int(num) for num in re.findall(r'\d+', ports)]
   
   params = {
     'cluster_name': cluster_name,

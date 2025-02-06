@@ -40,7 +40,7 @@ def create_ECR_repo(logger, params):
   ecr_uri = params["ecr_uri"]
   local_container = params["local_container"]
 
-  ecr = boto3.client('ecr', region_name='{{aws_region}}')
+  ecr = boto3.client('ecr', region_name='us-west-1')
   try:
     response = ecr.create_repository(
       repositoryName=ecr_repo
@@ -55,8 +55,8 @@ def create_ECR_repo(logger, params):
   
   # Tag and Push docker to ECR
   try:
-    session = boto3.Session(region_name='{{aws_region}}', profile_name='default')
-    client = session.client('ecr', region_name='{{aws_region}}')
+    session = boto3.Session(region_name='us-west-1', profile_name='default')
+    client = session.client('ecr', region_name='us-west-1')
     
     response = client.get_authorization_token()
     
@@ -91,7 +91,7 @@ def create_cluster(logger, params):
   tags = params["tags"]
   cluster_name = params["cluster_name"]
 
-  ecs = boto3.client('ecs', region_name='{{aws_region}}')
+  ecs = boto3.client('ecs', region_name='us-west-1')
   
   try:
     response = ecs.create_cluster(
@@ -114,7 +114,7 @@ def register_task_definition(logger, params):
     params (dict): the configuration/env params with username/cluster_name/etc
   """
 
-  ecs = boto3.client('ecs', region_name='{{aws_region}}')
+  ecs = boto3.client('ecs', region_name='us-west-1')
   
   tags = params["tags"]
   task_family_name = params["task_family_name"]
@@ -149,8 +149,8 @@ def register_task_definition(logger, params):
         'logConfiguration': {
           'logDriver': 'awslogs',
           'options': {
-            'awslogs-group': '/ecs/{{project_name}}',
-            'awslogs-region': '{{aws_region}}',
+            'awslogs-group': 'ecs/projectname',
+            'awslogs-region': 'us-west-1',
             'awslogs-stream-prefix': 'ecs'
           }
         },
@@ -175,7 +175,7 @@ def create_service(logger, params):
     params (dict): the configuration/env params with username/cluster_name/etc
   """
 
-  ecs = boto3.client('ecs', region_name='{{aws_region}}')
+  ecs = boto3.client('ecs', region_name='us-west-1')
   
   tags = params["tags"]
   cluster_name = params["cluster_name"]
@@ -197,7 +197,7 @@ def create_service(logger, params):
         'subnets': [
           subnet
         ],
-        'assignPublicIp': 'DISABLED',
+        'assignPublicIp': 'ENABLED',
         'securityGroups': [
           security_group
         ]

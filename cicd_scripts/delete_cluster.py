@@ -24,7 +24,7 @@ def stop_and_delete_cluster(logger, params):
     returns 0 on success, or -1 on failure
   """
   # Cluster/Service/Task client
-  ecs = boto3.client('ecs', region_name='{{aws_region}}')
+  ecs = boto3.client('ecs', region_name='us-west-1')
   # clean clusters
   cluster_name = params["cluster_name"]
   clusters = []
@@ -122,7 +122,7 @@ def cleanup_task_definitions(logger, params):
     returns 0 on success, or -1 on failure
   """
   # Cluster/Service/Task client
-  ecs = boto3.client('ecs', region_name='{{aws_region}}')
+  ecs = boto3.client('ecs', region_name='us-west-1')
   
   cluster_name = params["cluster_name"]
   task_definitions = []  
@@ -179,7 +179,7 @@ def clean_ECR(logger, params):
   """
   
   # ECR repo client
-  ecr = boto3.client('ecr', region_name='{{aws_region}}')
+  ecr = boto3.client('ecr', region_name='us-west-1')
   
   cluster_name = params["cluster_name"]
   repositories = []
@@ -230,7 +230,7 @@ def delete_all_clusters(logger, params):
     params (dict): the configuration/env params with username/cluster_name/etc
   """
   
-  ecs = boto3.client('ecs', region_name='{{aws_region}}')
+  ecs = boto3.client('ecs', region_name='us-west-1')
   
   response = []
   try:

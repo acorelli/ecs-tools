@@ -1,0 +1,8 @@
+{
+  "name": "projectname",
+  "version": "v0.0",
+  "author": "acorelli",
+  "scripts": {
+    "start": "node app.js"
+  }
+}

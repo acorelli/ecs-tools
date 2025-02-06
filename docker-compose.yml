@@ -1,14 +1,14 @@
 version: '3.8'
 services:
-  {{project_name}}:
-    image: {{project_name}}:{{version_tag}}
+  projectname:
+    image: projectname:v0.0
     build:
       context: .
       dockerfile: Dockerfile
       args:
         - COMPOSE_RUN=true
     volumes:
-      - {{project_name}}-data:/usr/src/app
+      - projectname-data:/usr/src/app
       - ./:/usr/src/app
       - node_modules:/usr/src/app/node_modules/
     ports:
@@ -56,7 +56,7 @@ services:
   s3mock:
     image: adobe/s3mock
     environment:
-      - initialBuckets={{comma separated list of bucket names, e.g. bucket1,bucket2,bucket3}}
+      - initialBuckets=projectname,test-bucket
       - root=/data
       - retainFilesOnExit=true
     volumes:
@@ -68,7 +68,7 @@ services:
 
 volumes:
   dynamodb-data:
-  {{project_name}}-data:
+  projectname-data:
   node_modules:
   
 networks:
